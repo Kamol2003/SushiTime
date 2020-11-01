@@ -1,12 +1,22 @@
 public class CardInfo {
+    private String owner;
     private String cardNumber;
     private String cardPassword;
     private double money;
 
-    public CardInfo(String cardNumber, String cardPassword, double money) {
+    public CardInfo(String owner,String cardNumber, String cardPassword, double money) {
+        this.owner = owner;
         this.cardNumber = cardNumber;
         this.cardPassword = cardPassword;
         this.money = money;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 
     public String getCardNumber() {

@@ -55,8 +55,8 @@ public class Manager implements CheckManager {
         return " | " + getName()+" | "+getEmail()+" | "+getPhoneNumber()+" | ";
     }
 
-    public static void  add(List<MyOrders> ordersList,String name, String description, double price){
-        ordersList.add(new MyOrders(name.toUpperCase(),description,price));
+    public static void  add(List<MyOrders> ordersList,String name, String description, double price,String type){
+        ordersList.add(new MyOrders(name.toUpperCase(),description,price,type));
     }
     public static void  remove(List<MyOrders> ordersList, String name){
         for (int i = 0; i < ordersList.size(); i++) {

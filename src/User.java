@@ -5,7 +5,7 @@ public class User implements Check{
     private String phoneNumber;
     private String address;
 
-    public User(String name, String email, String password,String address, String phoneNumber) {
+    User(String name, String email, String password,String address, String phoneNumber) {
         this.name = name;
         this.email = email;
         this.password = password;

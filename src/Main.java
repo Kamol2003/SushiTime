@@ -1,8 +1,6 @@
-import javax.jws.soap.SOAPBinding;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.TreeMap;
 
 public class Main {
     static Scanner scannerDouble = new Scanner(System.in);
@@ -20,20 +18,20 @@ public class Main {
         // 4. Desserts
         // 5. Beverages
         // SUSHI
-        ordersList.add(new MyOrders("KURUME", "Salmon, eel, cream cheese, spice sauce, flying fish roe 6pcs", 65000.0));
-        ordersList.add(new MyOrders("BAKED MIX", "Snow crab, cucumber, salmon, eel, shrimp, mayonnaise, flying fish roe 6 pcs", 55000.0));
+        ordersList.add(new MyOrders("KURUME", "Salmon, eel, cream cheese, spice sauce, flying fish roe 6pcs", 65000.0,"SUSHI"));
+        ordersList.add(new MyOrders("BAKED MIX", "Snow crab, cucumber, salmon, eel, shrimp, mayonnaise, flying fish roe 6 pcs", 55000.0,"SUSHI"));
         // SOUPS
-        ordersList.add(new MyOrders("FO-BO-SOUP", "Rice noodles, chicken, green onions, mint, cilantro, lime, garlic", 55000.0));
-        ordersList.add(new MyOrders("COOK-SEA", "Classic soup Kuk-Si", 30000.0));
+        ordersList.add(new MyOrders("FO-BO-SOUP", "Rice noodles, chicken, green onions, mint, cilantro, lime, garlic", 55000.0,"SOUP"));
+        ordersList.add(new MyOrders("COOK-SEA", "Classic soup Kuk-Si", 30000.0,"SOUP"));
         // SALADS
-        ordersList.add(new MyOrders("CHUKA SALAD", "Chuka salad, peanut sauce, lemon, sesame", 41000.0));
-        ordersList.add(new MyOrders("GREEK SALAD", "Iceberg, tomatoes, cucumbers, fetaki cheese, olives, onions, bell peppers, olive oil", 37000.0));
+        ordersList.add(new MyOrders("CHUKA SALAD", "Chuka salad, peanut sauce, lemon, sesame", 41000.0,"SALAD"));
+        ordersList.add(new MyOrders("GREEK SALAD", "Iceberg, tomatoes, cucumbers, fetaki cheese, olives, onions, bell peppers, olive oil", 37000.0,"SALAD"));
         // DESSERTS
-        ordersList.add(new MyOrders("SWEET ROLL", "Rice pudding, pear, banana, apple", 45000.0));
-        ordersList.add(new MyOrders("FRUIT ROLL", "Rice paper, sweet cream cheese, banana, cherry", 60000.0));
+        ordersList.add(new MyOrders("SWEET ROLL", "Rice pudding, pear, banana, apple", 45000.0,"DESSERT"));
+        ordersList.add(new MyOrders("FRUIT ROLL", "Rice paper, sweet cream cheese, banana, cherry", 60000.0,"DESSERT"));
         // BEVERAGES
-        ordersList.add(new MyOrders("LEMON TEA", "With sugar", 10000.0));
-        ordersList.add(new MyOrders("SUNRISE", "Lemon, Cherry, Ice", 15000.0));
+        ordersList.add(new MyOrders("LEMON TEA", "With sugar", 10000.0,"BEVERAGE"));
+        ordersList.add(new MyOrders("SUNRISE", "Lemon, Cherry, Ice", 15000.0,"BEVERAGE"));
 //          USER
         // 2 ta user login qilingan bolsin va massiv.length = 10 bosin
         List<User> userList = new ArrayList<>();
@@ -41,6 +39,10 @@ public class Main {
         userList.add(new User("Sardor", "sardor@gmail.com", "c222", "34-uy. 12-kv. Yunusobod, Toshkent", "+998997629087"));
         userList.add(new User("Sarvar", "sarvar@gmail.com", "c333", "5-uy 9-kv. Karshi", "+998976541234"));
 //           MANAGER
+        List<CardInfo> cardInfoList = new ArrayList<>();
+        cardInfoList.add(new CardInfo("Anvar","8600111","anvar111",300000.0));
+        cardInfoList.add(new CardInfo("Sardor","8600222","sardor222",400000.0));
+        cardInfoList.add(new CardInfo("Sarvar","8600333","sarvar333",500000.0));
         List<Manager> managerList = new ArrayList<>();
         managerList.add(new Manager("Javlon", "javlon@gmail.com", "m111", "+998912345678"));
         managerList.add(new Manager("Aziz", "aziz@gmail.com", "m222", "+998912345678"));
@@ -75,44 +77,46 @@ public class Main {
                                 String managerEmailPassword = scannerStr.nextLine();
                                 System.out.println();
                                 for (Manager manager : managerList) {
-                                    if (manager.login(managerEmail,managerEmailPassword)){
+                                    if (manager.login(managerEmail, managerEmailPassword)) {
                                         // 1) Add new food"
                                         // 2) Remove food")
                                         // 3) Change price"
-                                         printManagerTasks();
+                                        printManagerTasks();
                                         System.out.print("Choose task: ");
                                         int task = scannerInt.nextInt();
                                         System.out.println();
-                                        switch (task){
+                                        switch (task) {
                                             case 1:
-                                                System.out.println("What is its Name? : ");
+                                                System.out.println("Type? :");
+                                                String newFoodType = scannerStr.nextLine();
+                                                System.out.println("Name? : ");
                                                 String newFoodName = scannerStr.nextLine();
                                                 System.out.println("Write description: ");
                                                 String newFoodDescription = scannerStr.nextLine();
                                                 System.out.println("Set price: ");
                                                 double setPrice = scannerDouble.nextDouble();
-                                                Manager.add(ordersList, newFoodName, newFoodDescription,setPrice);
+                                                Manager.add(ordersList, newFoodName, newFoodDescription, setPrice,newFoodType.toUpperCase());
                                                 System.out.println("||****!!! Change alert !!!****||");
                                                 System.out.println("============================================================");
-                                                System.out.println("|===We have new food===|\nName: "+newFoodName+"\nDescription: "
-                                                +newFoodDescription+"\nPrice: "+setPrice+" UZS");
+                                                System.out.println("|===We have new food===|\nName: " + newFoodName + "\nDescription: "
+                                                        + newFoodDescription + "\nPrice: " + setPrice + " UZS");
                                                 System.out.println("============================================================");
                                                 break;
                                             case 2:
                                                 for (int a = 0; a < ordersList.size(); a++) {
-                                                    System.out.println("| "+ordersList.get(a).getName()+" |");
+                                                    System.out.println("| " + ordersList.get(a).getName() + " |");
                                                 }
                                                 System.out.println("Which food we don't serve anymore? : ");
                                                 String deletedFood = scannerStr.nextLine();
-                                                Manager.remove(ordersList,deletedFood.toUpperCase());
+                                                Manager.remove(ordersList, deletedFood.toUpperCase());
                                                 System.out.println("||****!!! Change alert !!!****||");
                                                 System.out.println("============================================================");
-                                                System.out.println(deletedFood+" is deleted from menu.");
+                                                System.out.println(deletedFood + " is deleted from menu.");
                                                 System.out.println("============================================================");
                                                 break;
                                             case 3:
                                                 for (int a = 0; a < ordersList.size(); a++) {
-                                                    System.out.println("| "+ordersList.get(a).getName()+" ==> "+ordersList.get(a).getPrice()+" UZS |");
+                                                    System.out.println("| " + ordersList.get(a).getName() + " ==> " + ordersList.get(a).getPrice() + " UZS |");
                                                 }
                                                 System.out.println("Enter the food, you want to reset price: ");
                                                 String resetPriceFoodName = scannerStr.nextLine();
@@ -126,11 +130,71 @@ public class Main {
                                                 }*/
                                                 System.out.println("Set new price: ");
                                                 Double newPrice = scannerDouble.nextDouble();
-                                                Manager.editPrice(ordersList,resetPriceFoodName.toUpperCase(),newPrice);
+                                                Manager.editPrice(ordersList, resetPriceFoodName.toUpperCase(), newPrice);
                                                 System.out.println("||****!!! Change alert !!!****||");
-                                                System.out.println("============================================================");
-                                                System.out.println(resetPriceFoodName+ "'s price is changed to "+newPrice+" UZS");
-                                                System.out.println("============================================================");
+                                                System.out.println("======================================================================");
+                                                System.out.println(resetPriceFoodName + "'s price is changed to " + newPrice + " UZS");
+                                                System.out.println("======================================================================");
+                                                break;
+                                        }
+                                    } else {
+                                        System.out.println("\n!!! Either email or password is invalid !!!\n");
+                                        b2=false;
+                                    }
+                                }
+                                break;
+                            case 2:
+                                System.out.print("Your Email: ");
+                                String userEmailLogin = scannerStr.nextLine();
+                                System.out.print("Your Password: ");
+                                String userPasswordLogin = scannerStr.nextLine();
+                                System.out.println();
+                                for (User user : userList) {
+                                    if (user.login(userEmailLogin,userPasswordLogin)){
+                                        System.out.println("||****** MENU ******||");
+                                        // 1. Sushi
+                                        // 2. Soups
+                                        // 3. Salads
+                                        // 4. Desserts
+                                        // 5. Beverages
+                                        printMenu();
+                                        int userFoodCategoryChoose = scannerInt.nextInt();
+                                        switch (userFoodCategoryChoose){
+                                            case 1:
+                                                ordersList.forEach(myOrders -> {
+                                                    if (myOrders.getType().equals("SUSHI")){
+                                                        System.out.println(myOrders.getName() + " == "+myOrders.getPrice());
+                                                    }
+                                                });
+                                                System.out.print("Which one do you want write its name: ");
+                                                String displayFoodDescription = scannerStr.nextLine();
+                                                ordersList.forEach(myOrders -> {
+                                                    if (myOrders.getType().equals(displayFoodDescription)){
+                                                        System.out.println("||*************** About"+myOrders.getName()+" ***************||");
+                                                        System.out.println("=========================================================================================");
+                                                        System.out.println("|| "+myOrders.getDescription());
+                                                        System.out.println("=========================================================================================");
+//                                                        double holderPrice = myOrders.getPrice();
+                                                        System.out.println("Press \"2\" to order: ");
+                                                        int buyButtonTwo = scannerInt.nextInt();
+                                                        if (buyButtonTwo==2){
+                                                        System.out.println("How many? : ");
+                                                        int quantity = scannerInt.nextInt();
+                                                        for (CardInfo cardInfo : cardInfoList) {
+                                                        cardInfo.setMoney(cardInfo.getMoney()- myOrders.getPrice()*quantity);
+                                                    }
+                                                }
+                                                    }
+                                                });
+                                                /*System.out.println("Press \"2\" to order: ");
+                                                int buyButtonTwo = scannerInt.nextInt();
+                                                if (buyButtonTwo==2){
+                                                    System.out.println("How many? : ");
+                                                    int quantity = scannerInt.nextInt();
+                                                    for (CardInfo cardInfo : cardInfoList) {
+                                                        cardInfo.setMoney(cardInfo.getMoney()-);
+                                                    }
+                                                }*/
                                                 break;
                                         }
                                     }else {
@@ -140,12 +204,12 @@ public class Main {
                                 break;
                         }
                         break;
-
                 }
             }
         }
     }
-    static void printSchedule(){
+
+    static void printSchedule() {
         System.out.println("||*** SCHEDULE ***||");
         System.out.println("Mon. 11.00 - 23.00");
         System.out.println("Tues. 11.00 - 23.00");
@@ -156,7 +220,7 @@ public class Main {
         System.out.println("Sun. 11.00 - 23.00");
     }
 
-    static void printMenu(){
+    static void printMenu() {
         System.out.println("1. Sushi");
         System.out.println("2. Soups");
         System.out.println("3. Salads");
@@ -164,19 +228,19 @@ public class Main {
         System.out.println("5. Beverages");
     }
 
-    static void printEntrySection(){
+    static void printEntrySection() {
         System.out.println("1) Login");
         System.out.println("2) Create account & Sign up");
-        System.out.println("3) Log out");
+        System.out.println("3) Delete account & Log out");
         System.out.println("4) Our Schedule");
     }
 
-    static void printStatus(){
+    static void printStatus() {
         System.out.println("1 ==> Manager");
         System.out.println("2 ==> Customer");
     }
 
-    static void printManagerTasks(){
+    static void printManagerTasks() {
         System.out.println("1) Add new food");
         System.out.println("2) Remove food");
         System.out.println("3) Change price");
