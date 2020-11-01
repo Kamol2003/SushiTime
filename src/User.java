@@ -1,16 +1,16 @@
-import sun.dc.pr.PRError;
-
 public class User implements Check{
     private String name;
     private String email;
     private String password;
+    private String phoneNumber;
     private String address;
 
-    public User(String name, String email, String password,String address) {
+    public User(String name, String email, String password,String address, String phoneNumber) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.address = address;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getName() {
@@ -45,8 +45,21 @@ public class User implements Check{
         this.address = address;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     @Override
     public boolean login(String email, String password) {
         return getEmail().equals(email) && getPassword().equals(password);
+    }
+
+    @Override
+    public String toString() {
+        return " | "+getName()+" | "+getEmail()+" | "+getPhoneNumber()+" | "+getAddress()+" | ";
     }
 }
