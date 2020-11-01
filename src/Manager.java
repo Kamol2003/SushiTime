@@ -55,20 +55,20 @@ public class Manager implements CheckManager {
         return " | " + getName()+" | "+getEmail()+" | "+getPhoneNumber()+" | ";
     }
 
-    public void add(List<MyOrders> ordersList,MyOrders myOrders,String name, String description, double price){
-        ordersList.add(new MyOrders(name,description,price));
+    public static void  add(List<MyOrders> ordersList,String name, String description, double price){
+        ordersList.add(new MyOrders(name.toUpperCase(),description,price));
     }
-    public void  remove(List<MyOrders> ordersList, String name){
+    public static void  remove(List<MyOrders> ordersList, String name){
         for (int i = 0; i < ordersList.size(); i++) {
             if (ordersList.get(i).getName().equals(name)){
                 ordersList.remove(i);
             }
         }
     }
-
-    public void editPrice(List<MyOrders> ordersList, String name ,double newPrice){
+// ERROR! with setPrice and Contructor
+    public static void editPrice(List<MyOrders> ordersList, String name ,double newPrice){
         for (int j = 0; j < ordersList.size(); j++) {
-            if (ordersList.get(j).equals(name)){
+            if (ordersList.get(j).getName().equals(name)){
                 ordersList.get(j).setPrice(newPrice);
             }
         }

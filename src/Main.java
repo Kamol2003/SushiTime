@@ -8,6 +8,8 @@ public class Main {
     static Scanner scannerDouble = new Scanner(System.in);
     static Scanner scannerInt = new Scanner(System.in);
     static Scanner scannerStr = new Scanner(System.in);
+    private static Object MyOrders;
+
     // Salad, Soups, Sushi uchun Mapni ozi yetarkan, uni orniga MyOrders class yaratamiz
     public static void main(String[] args) {
         // 5 sushi, 5 salad, 3 beverages, 4 soups, 2 desserts ==> total 19;
@@ -20,26 +22,17 @@ public class Main {
         // SUSHI
         ordersList.add(new MyOrders("KURUME", "Salmon, eel, cream cheese, spice sauce, flying fish roe 6pcs", 65000.0));
         ordersList.add(new MyOrders("BAKED MIX", "Snow crab, cucumber, salmon, eel, shrimp, mayonnaise, flying fish roe 6 pcs", 55000.0));
-        ordersList.add(new MyOrders("YAKUZA", "Fried salmon, spice sauce, shrimps, flying fish roe, cucumber 6 pcs.", 63000.0));
-        ordersList.add(new MyOrders("SHIZUOKA", "Eel, chicken, cucumber, mayonnaise, mozzarella cheese, cream cheese, salmon, sesame 6 pcs", 43000.0));
-        ordersList.add(new MyOrders("SASEBO", "Eel, cream cheese, cucumber, spice sauce, flying fish roe, green onions, sesame seeds 6 pcs", 45000.0));
         // SOUPS
         ordersList.add(new MyOrders("FO-BO-SOUP", "Rice noodles, chicken, green onions, mint, cilantro, lime, garlic", 55000.0));
         ordersList.add(new MyOrders("COOK-SEA", "Classic soup Kuk-Si", 30000.0));
-        ordersList.add(new MyOrders("MISO", "Seaweed, tofu, onion, nameko mushrooms", 33000.0));
-        ordersList.add(new MyOrders("RAMEN-SOUP", "Ramen noodles, shrimp, octopus, mussels, green onion", 52000.0));
         // SALADS
-        ordersList.add(new MyOrders("COOK-SEA", "Classic soup Kuk-Si", 30000.0));
-        ordersList.add(new MyOrders("COOK-SEA", "Classic soup Kuk-Si", 30000.0));
-        ordersList.add(new MyOrders("COOK-SEA", "Classic soup Kuk-Si", 30000.0));
-        ordersList.add(new MyOrders("COOK-SEA", "Classic soup Kuk-Si", 30000.0));
-        ordersList.add(new MyOrders("COOK-SEA", "Classic soup Kuk-Si", 30000.0));
+        ordersList.add(new MyOrders("CHUKA SALAD", "Chuka salad, peanut sauce, lemon, sesame", 41000.0));
+        ordersList.add(new MyOrders("GREEK SALAD", "Iceberg, tomatoes, cucumbers, fetaki cheese, olives, onions, bell peppers, olive oil", 37000.0));
         // DESSERTS
         ordersList.add(new MyOrders("SWEET ROLL", "Rice pudding, pear, banana, apple", 45000.0));
         ordersList.add(new MyOrders("FRUIT ROLL", "Rice paper, sweet cream cheese, banana, cherry", 60000.0));
         // BEVERAGES
         ordersList.add(new MyOrders("LEMON TEA", "With sugar", 10000.0));
-        ordersList.add(new MyOrders("FLAT WHITE", "Coffee de-caff", 13000.0));
         ordersList.add(new MyOrders("SUNRISE", "Lemon, Cherry, Ice", 15000.0));
 //          USER
         // 2 ta user login qilingan bolsin va massiv.length = 10 bosin
@@ -78,8 +71,7 @@ public class Main {
                             case 1:
                                 System.out.print("Your Email: ");
                                 String managerEmail = scannerStr.nextLine();
-                                System.out.println();
-                                System.out.print("Confirm Password: ");
+                                System.out.print("Confirm with Password: ");
                                 String managerEmailPassword = scannerStr.nextLine();
                                 System.out.println();
                                 for (Manager manager : managerList) {
@@ -93,7 +85,52 @@ public class Main {
                                         System.out.println();
                                         switch (task){
                                             case 1:
-
+                                                System.out.println("What is its Name? : ");
+                                                String newFoodName = scannerStr.nextLine();
+                                                System.out.println("Write description: ");
+                                                String newFoodDescription = scannerStr.nextLine();
+                                                System.out.println("Set price: ");
+                                                double setPrice = scannerDouble.nextDouble();
+                                                Manager.add(ordersList, newFoodName, newFoodDescription,setPrice);
+                                                System.out.println("||****!!! Change alert !!!****||");
+                                                System.out.println("============================================================");
+                                                System.out.println("|===We have new food===|\nName: "+newFoodName+"\nDescription: "
+                                                +newFoodDescription+"\nPrice: "+setPrice+" UZS");
+                                                System.out.println("============================================================");
+                                                break;
+                                            case 2:
+                                                for (int a = 0; a < ordersList.size(); a++) {
+                                                    System.out.println("| "+ordersList.get(a).getName()+" |");
+                                                }
+                                                System.out.println("Which food we don't serve anymore? : ");
+                                                String deletedFood = scannerStr.nextLine();
+                                                Manager.remove(ordersList,deletedFood.toUpperCase());
+                                                System.out.println("||****!!! Change alert !!!****||");
+                                                System.out.println("============================================================");
+                                                System.out.println(deletedFood+" is deleted from menu.");
+                                                System.out.println("============================================================");
+                                                break;
+                                            case 3:
+                                                for (int a = 0; a < ordersList.size(); a++) {
+                                                    System.out.println("| "+ordersList.get(a).getName()+" ==> "+ordersList.get(a).getPrice()+" UZS |");
+                                                }
+                                                System.out.println("Enter the food, you want to reset price: ");
+                                                String resetPriceFoodName = scannerStr.nextLine();
+                                               /* for (int b = 0; b < ordersList.size(); b++) {
+                                                    if (ordersList.get(b).getName().equals(resetPriceFoodName)){
+                                                        int holderSequence = b;
+                                                        String holderSequenceName = ordersList.get(b).getName();
+                                                        String holderSequenceDescription = ordersList.get(b).getDescription();
+                                                        break;
+                                                    }
+                                                }*/
+                                                System.out.println("Set new price: ");
+                                                Double newPrice = scannerDouble.nextDouble();
+                                                Manager.editPrice(ordersList,resetPriceFoodName.toUpperCase(),newPrice);
+                                                System.out.println("||****!!! Change alert !!!****||");
+                                                System.out.println("============================================================");
+                                                System.out.println(resetPriceFoodName+ "'s price is changed to "+newPrice+" UZS");
+                                                System.out.println("============================================================");
                                                 break;
                                         }
                                     }else {
@@ -108,7 +145,7 @@ public class Main {
             }
         }
     }
-    static void printScheduleRu(){
+    static void printSchedule(){
         System.out.println("||*** SCHEDULE ***||");
         System.out.println("Mon. 11.00 - 23.00");
         System.out.println("Tues. 11.00 - 23.00");
