@@ -22,6 +22,10 @@ public class MyOrders {
         return price;
     }
 
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     public int getQuantity() {
         return quantity;
     }

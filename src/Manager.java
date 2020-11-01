@@ -1,11 +1,13 @@
-public class Manager implements CheckManager{
+import java.util.List;
+
+public class Manager implements CheckManager {
     private String name;
     private String email;
     private String password;
     private String phoneNumber;
     private String managerKey = "&t%Z{e)V>RXpQ5Y";
 
-    public Manager(String name, String email, String password, String phoneNumber) {
+    Manager(String name, String email, String password, String phoneNumber) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -30,9 +32,6 @@ public class Manager implements CheckManager{
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getEmail() {
         return email;
@@ -46,15 +45,59 @@ public class Manager implements CheckManager{
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    @Override
+    public String toString() {
+        return " | " + getName()+" | "+getEmail()+" | "+getPhoneNumber()+" | ";
+    }
+
+    public void add(List<MyOrders> ordersList,MyOrders myOrders,String name, String description, double price){
+        ordersList.add(new MyOrders(name,description,price));
+    }
+    public void  remove(List<MyOrders> ordersList, String name){
+        for (int i = 0; i < ordersList.size(); i++) {
+            if (ordersList.get(i).getName().equals(name)){
+                ordersList.remove(i);
+            }
+        }
+    }
+
+    public void editPrice(List<MyOrders> ordersList, String name ,double newPrice){
+        for (int j = 0; j < ordersList.size(); j++) {
+            if (ordersList.get(j).equals(name)){
+                ordersList.get(j).setPrice(newPrice);
+            }
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
