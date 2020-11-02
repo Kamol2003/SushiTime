@@ -5,7 +5,7 @@ public class Manager implements CheckManager {
     private String email;
     private String password;
     private String phoneNumber;
-    private String managerKey = "&t%Z{e)V>RXpQ5Y";
+    private static String managerKey = "12345abcde";
 
     Manager(String name, String email, String password, String phoneNumber) {
         this.name = name;
@@ -20,11 +20,11 @@ public class Manager implements CheckManager {
     }
 
     @Override
-    public boolean loginManager(String managerKey) {
+    public  boolean loginManager(String managerKey) {
         return getManagerKey().equals(managerKey);
     }
 
-    public String getManagerKey() {
+    public static String getManagerKey() {
         return managerKey;
     }
 

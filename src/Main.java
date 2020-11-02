@@ -209,6 +209,96 @@ public class Main {
                         }
                         break;
                     case 2:
+                        // 1 ==> Manager
+                        // 2 ==> Customer
+                        // 0 ==> Back to main menu
+                        printStatus();
+                        System.out.print("||* Choose your status *|| ==> ");
+                        int statusSignUp = scannerInt.nextInt();
+                        System.out.println();
+                        switch (statusSignUp){
+                            case 1:
+                                System.out.print("Confirm yourself with ManagerKey:");
+                                String managerKeySignUp = scannerStr.nextLine();
+                                if (managerKeySignUp.equals(Manager.getManagerKey())){
+                                    System.out.println("||=== Your Manager status is confirmed ===||");
+                                    System.out.println();
+                                    // name
+                                    // email
+                                    // password
+                                    // phoneNumber
+                                    System.out.print("Enter your name: ");
+                                    String managerName = scannerStr.nextLine();
+                                    System.out.print("Enter your email: ");
+                                    String managerEmail = scannerStr.nextLine();
+                                    System.out.print("Set password: ");
+                                    String managerEmailPassword = scannerStr.nextLine();
+                                    System.out.print("Enter your Phone number: ");
+                                    String managerPhone = scannerStr.nextLine();
+                                    managerList.add(new Manager(managerName,managerEmail,managerEmailPassword,managerPhone));
+                                    System.out.println("\n|||$$$$$$ Welcome "+managerName+" You are now manager $$$$$$|||\n");
+                                    // 1) Add new food"
+                                    // 2) Remove food")
+                                    // 3) Change price"
+                                    printManagerTasks();
+                                    System.out.print("Choose task: ");
+                                    int task = scannerInt.nextInt();
+                                    System.out.println();
+                                    switch (task) {
+                                        case 1:
+                                            System.out.println("Type? :");
+                                            String newFoodType = scannerStr.nextLine();
+                                            System.out.println("Name? : ");
+                                            String newFoodName = scannerStr.nextLine();
+                                            System.out.println("Write description: ");
+                                            String newFoodDescription = scannerStr.nextLine();
+                                            System.out.println("Set price: ");
+                                            double setPrice = scannerDouble.nextDouble();
+                                            Manager.add(ordersList, newFoodName, newFoodDescription, setPrice, newFoodType.toUpperCase());
+                                            System.out.println("||****!!! Change alert !!!****||");
+                                            System.out.println("============================================================");
+                                            System.out.println("|===We have new food===|\nName: " + newFoodName + "\nDescription: "
+                                                    + newFoodDescription + "\nPrice: " + setPrice + " UZS");
+                                            System.out.println("============================================================");
+                                            break;
+                                        case 2:
+                                            for (int a = 0; a < ordersList.size(); a++) {
+                                                System.out.println("| " + ordersList.get(a).getName() + " |");
+                                            }
+                                            System.out.println("Which food we don't serve anymore? : ");
+                                            String deletedFood = scannerStr.nextLine();
+                                            Manager.remove(ordersList, deletedFood.toUpperCase());
+                                            System.out.println("||****!!! Change alert !!!****||");
+                                            System.out.println("============================================================");
+                                            System.out.println(deletedFood + " is deleted from menu.");
+                                            System.out.println("============================================================");
+                                            break;
+                                        case 3:
+                                            for (int a = 0; a < ordersList.size(); a++) {
+                                                System.out.println("| " + ordersList.get(a).getName() + " ==> " + ordersList.get(a).getPrice() + " UZS |");
+                                            }
+                                            System.out.println("Enter the food, you want to reset price: ");
+                                            String resetPriceFoodName = scannerStr.nextLine();
+                                               /* for (int b = 0; b < ordersList.size(); b++) {
+                                                    if (ordersList.get(b).getName().equals(resetPriceFoodName)){
+                                                        int holderSequence = b;
+                                                        String holderSequenceName = ordersList.get(b).getName();
+                                                        String holderSequenceDescription = ordersList.get(b).getDescription();
+                                                        break;
+                                                    }
+                                                }*/
+                                            System.out.println("Set new price: ");
+                                            Double newPrice = scannerDouble.nextDouble();
+                                            Manager.editPrice(ordersList, resetPriceFoodName.toUpperCase(), newPrice);
+                                            System.out.println("||****!!! Change alert !!!****||");
+                                            System.out.println("======================================================================");
+                                            System.out.println(resetPriceFoodName + "'s price is changed to " + newPrice + " UZS");
+                                            System.out.println("======================================================================");
+                                            break;
+                                    }
+                                }
+
+                        }
                         // name ==> owner CardInfo
                         // email
                         // password
