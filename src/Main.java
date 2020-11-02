@@ -60,7 +60,7 @@ public class Main {
             int operation = scannerInt.nextInt();
             System.out.println();
             boolean b2 = true;
-            while (b2) {
+//            while (b2) {
                 switch (operation) {
                     case 1:
                         // 1 ==> Manager
@@ -188,12 +188,16 @@ public class Main {
                                                     int quantity = scannerInt.nextInt();
                                                     for (CardInfo cardInfo : cardInfoList) {
                                                         if (cardInfo.getOwner().equals(user.getName())) {
-                                                            cardInfo.setMoney(cardInfo.getMoney() - myOrders.getPrice() * quantity);
-                                                            System.out.println("Dear " + user.getName() + ", payment was successful!!!");
-                                                            System.out.println("You ordered: " + quantity + " " + displayFoodDescription.toUpperCase());
-                                                            System.out.println("Total price: "+myOrders.getPrice()*quantity+" UZS");
-                                                            System.out.println("Your current balance = "+cardInfo.getMoney()+" UZS");
-                                                            System.out.println("\n=================================================================\n");
+                                                            System.out.print("Confirm your Card Password: ");
+                                                            String cardPassword = scannerStr.nextLine();
+                                                            if (cardPassword.equals(cardInfo.getCardPassword())) {
+                                                                cardInfo.setMoney(cardInfo.getMoney() - myOrders.getPrice() * quantity);
+                                                                System.out.println("Dear " + user.getName() + ", payment was successful!!!");
+                                                                System.out.println("You ordered: " + quantity + " " + displayFoodDescription.toUpperCase());
+                                                                System.out.println("Total price: " + myOrders.getPrice() * quantity + " UZS");
+                                                                System.out.println("Your current balance = " + cardInfo.getMoney() + " UZS");
+                                                                System.out.println("\n=================================================================\n");
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -204,8 +208,40 @@ public class Main {
                                 }
                         }
                         break;
+                    case 2:
+                        // name ==> owner CardInfo
+                        // email
+                        // password
+                        // address
+                        // phoneNumber
+                        // cardNumber
+                        // cardPassword
+                        // money: double
+                        break;
+                    case 3:
+                        userList.forEach(user -> System.out.println(user.getName()));
+                        System.out.println("\n=================================================================\n");
+                        System.out.println("Enter your name: ");
+                        String deleteAccountName = scannerStr.nextLine();
+                        for (int i = 0; i < userList.size(); i++) {
+                            if (userList.get(i).getName().equals(deleteAccountName)) {
+                                System.out.println("Confirm with your password: ");
+                                String deleteConfirmPassword = scannerStr.nextLine();
+                                if (userList.get(i).getPassword().equals(deleteConfirmPassword)) {
+                                    userList.remove(i);
+                                }
+                            }
+                        }
+                        System.out.println(deleteAccountName+" is removed from the list!!!");
+                        System.out.println("\n=================================================================\n");
+                        userList.forEach(user -> System.out.println(user.getName()));
+                        break;
+                    case 4:
+                        printSchedule();
+                        break;
+                    default:
+                        System.out.println("!!! Wrong command !!!");
                 }
-            }
         }
     }
 
