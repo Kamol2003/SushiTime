@@ -7,10 +7,7 @@ public class Main {
     static Scanner scannerInt = new Scanner(System.in);
     static Scanner scannerStr = new Scanner(System.in);
     private static Object MyOrders;
-
-    // Salad, Soups, Sushi uchun Mapni ozi yetarkan, uni orniga MyOrders class yaratamiz
     public static void main(String[] args) {
-        // 5 sushi, 5 salad, 3 beverages, 4 soups, 2 desserts ==> total 19;
         List<MyOrders> ordersList = new ArrayList<>();
         // 1. Sushi
         // 2. Soups
@@ -33,7 +30,6 @@ public class Main {
         ordersList.add(new MyOrders("LEMON TEA", "With sugar", 10000.0, "BEVERAGE"));
         ordersList.add(new MyOrders("SUNRISE", "Lemon, Cherry, Ice", 15000.0, "BEVERAGE"));
 //          USER
-        // 2 ta user login qilingan bolsin va massiv.length = 10 bosin
         List<User> userList = new ArrayList<>();
         userList.add(new User("Anvar", "anvar@gmail.com", "c111", "13-uy 43-kv. Shayxontohur, Toshkent", "+998991234567"));
         userList.add(new User("Sardor", "sardor@gmail.com", "c222", "34-uy. 12-kv. Yunusobod, Toshkent", "+998997629087"));
